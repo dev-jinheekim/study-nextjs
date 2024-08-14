@@ -48,6 +48,10 @@ export async function fetchLatestInvoices() {
   }
 }
 
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export async function fetchCardData() {
   try {
     // You can probably combine these into a single SQL query
@@ -65,6 +69,8 @@ export async function fetchCardData() {
       customerCountPromise,
       invoiceStatusPromise,
     ]);
+
+    await delay(9000);
 
     const numberOfInvoices = Number(data[0].rows[0].count ?? '0');
     const numberOfCustomers = Number(data[1].rows[0].count ?? '0');
