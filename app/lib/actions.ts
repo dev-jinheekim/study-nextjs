@@ -53,3 +53,9 @@ export async function updateInvoice(id: string, formData: FormData) {
   revalidatePath('/dashboard/invoices'); // 클라이언트 캐시를 지우고 새로운 서버 요청을 하기 위해 호출합니다
   redirect('/dashboard/invoices');
 }
+
+export async function deleteInvoice(id: string) {
+  await sql`
+  DELETE FROM invoices WHERE id = ${id}`;
+  revalidatePath('/dashboard/invoices');
+}
